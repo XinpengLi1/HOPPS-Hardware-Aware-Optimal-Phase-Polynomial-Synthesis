@@ -1,5 +1,7 @@
 from .Z3_edge_cnot import z3_edge_cnot
 from .Z3_edge_depth import z3_edge_depth
+from .Z3_edge_rzz_cnot import z3_edge_rzz_cnot
+from .Z3_edge_rzz_depth import z3_edge_rzz_depth
 
 def z3_sat_solve_free_output(num_qubit, coupling_map, term ,I, G, theta,  rep = False, max_k=30, cnot_or_depth = 'cnot', display = False):
     if len(theta) == 1:
@@ -13,6 +15,10 @@ def z3_sat_solve_free_output(num_qubit, coupling_map, term ,I, G, theta,  rep = 
             model = z3_edge_cnot (num_qubit, coupling_map, terms = term , I = I, G=G ,rep = rep)
         elif cnot_or_depth == 'depth':
             model = z3_edge_depth (num_qubit, coupling_map, terms = term , I = I, G=G ,rep = rep)
+        elif cnot_or_depth == 'rzz_cnot':
+            model = z3_edge_rzz_cnot (num_qubit, coupling_map, terms = term , I = I, G=G ,rep = rep)
+        elif cnot_or_depth == 'rzz_depth':
+            model = z3_edge_rzz_depth (num_qubit, coupling_map, terms = term , I = I, G=G ,rep = rep)
         else:
             raise("One cnot and depth can be chose")
 
