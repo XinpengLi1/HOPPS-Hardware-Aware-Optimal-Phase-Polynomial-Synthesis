@@ -110,7 +110,7 @@ def cut_partioned_qc_in_depth(partioned_bq_qc, depth):
             cnot_block_qc = swap_to_cnot(inst.definition)
 
             # Cut if too deep
-            while cnot_block_qc.count_ops()['cx'] > depth:
+            while cnot_block_qc.count_ops().get('cx', 0) + cnot_block_qc.count_ops().get('rzz', 0) > depth:
                 front_circuit, cnot_block_qc = cut_circuit_by_topo_index(cnot_block_qc, depth)
 
                 # Wrap front and rear as Instructions to preserve structure

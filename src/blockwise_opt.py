@@ -356,7 +356,7 @@ def block_opt_qaoa(recovered_transpiled_bound_org_qc,coupling_map,cnot_or_depth 
 
             block_index += 1
 
-            if decomposed_block.count_ops()['cx'] <= optimized_block.count_ops()['cx']:
+            if decomposed_block.count_ops().get('cx', 0) + decomposed_block.count_ops().get('rzz', 0) <= optimized_block.count_ops().get('cx', 0) + optimized_block.count_ops().get('rzz', 0):
                 opt_qc = opt_qc.compose(decomposed_block, list_gate_qubits)
             else:
                 opt_qc = opt_qc.compose(optimized_block, list_gate_qubits)
